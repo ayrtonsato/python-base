@@ -1,36 +1,35 @@
 #!/usr/bin/env python3
+__version__ = "0.1.1"
 
-template = """
-Olá, %(nome)s
+import sys
+import os
 
-    Tem interesse em comprar %(produto)s?
+arguments = sys.argv[1:]
+if not arguments:
+    print("informe o nome do arquivo de emails")
+    sys.exit(1)
 
-    Este produto é ótimo para resolver
-    %(texto)s
+filename = arguments[0]
+templatename = arguments[1]
 
-    Clique agora em %(link)s
+path = os.curdir
+filepath = os.path.join(path, filename)
+templatepath = os.path.join(path, templatename)
 
-    Apenas %(quantidade)d disponiveis!
-
-    Preço promocional %(preco).2f
-"""
-
-clientes = ["Maria", "Joao", "Ayrton"]
-produto = "caneta"
-texto = "Escrever muito bem"
-link = "https://canetaazul.com.br"
-quantidade = 1
-preco = 10.00
-
-for cliente in clientes:
+clientes = []
+for line in open(filepath):
+    name, email = line.split(",")
+    # TODO: substituir por envio de email
+    print(f"Enviando email para: {email}")
     print(
-        template
+        open(templatepath).read()
         % {
-            "nome": cliente,
-            "produto": produto,
-            "texto": texto,
-            "link": link,
-            "quantidade": quantidade,
-            "preco": preco
+            "nome": name,
+            "produto": "caneta",
+            "texto": "Escrever muito bem",
+            "link": "https://canetaazul.com.br",
+            "quantidade": 1,
+            "preco": 10.00,
         }
     )
+    print("-" * 50)
