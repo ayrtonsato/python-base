@@ -83,7 +83,11 @@ filepath = os.path.join(path, "infixcalc.log")
 timestamp = datetime.now().isoformat()
 user = os.getenv('USER', 'anonymous')
 
-with open(filepath, "a") as file_:
-    file_.write(f"{timestamp} - {user} - {operation}, {n1}, {n2} = {result}\n")
-
 print(f"O resultado é {result}")
+
+try:
+    with open(filepath, "a") as file_:
+        file_.write(f"{timestamp} - {user} - {operation}, {n1}, {n2} = {result}\n")
+except PermissionError as e:
+    print(str(e))
+    sys.exit(1)
