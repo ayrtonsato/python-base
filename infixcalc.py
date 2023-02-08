@@ -32,6 +32,20 @@ __author__ = "Ayrton Hiroshi Sato"
 import sys
 import os
 from datetime import datetime
+import logging
+
+# TODO: Usar GURU
+log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+log = logging.Logger("logs.py", log_level)
+ch = logging.StreamHandler()
+ch.setLevel(log_level)
+fmt = logging.Formatter(
+    '%(asctime)s %(name)s %(levelname)s '
+    'l:%(lineno)d f:%(filename)s: %(message)s'
+)
+ch.setFormatter(fmt)
+log.addHandler(ch)
+
 
 args = sys.argv[1:]
 
