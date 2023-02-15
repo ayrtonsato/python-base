@@ -5,8 +5,7 @@ import os
 from logging import handlers
 
 # BOILERPLATE
-# TODO: usar função
-# TODO: usar lib (loguru)
+# TODO: mover para um módulo de utilidades
 log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
 ## nossa instância de logger
 log = logging.Logger("logs.py", log_level)

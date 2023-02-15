@@ -49,7 +49,12 @@ log.addHandler(ch)
 
 args = sys.argv[1:]
 
-valid_operations = ("sum", "sub", "mul", "div")
+valid_operations = {
+    "sum": lambda a, b: a + b,
+    "sub": lambda a, b: a - b,
+    "mul": lambda a, b: a * b,
+    "div": lambda a, b: a / b,
+}
 operation = ""
 nums = []
 result = 0
@@ -82,15 +87,7 @@ for num in nums:
 
 n1, n2 = validated_nums
 
-# TODO: Usar dict de funcoes
-if operation == "sum":
-    result = n1 + n2
-elif operation == "sub":
-    result = n1 - n2
-elif operation == "mul":
-    result = n1 * n2
-elif operation == "div":
-    result = n1 / n2
+result = valid_operations[operation](n1, n2)
 
 path = os.curdir
 filepath = os.path.join(path, "infixcalc.log")
