@@ -27,17 +27,21 @@ import logging
 
 log = logging.Logger("alerta")
 
-try:
-    temp = float(input("Temperatura: ").strip())
-except ValueError:
-    log.error("Temperatura inválida")
-    sys.exit(1)
-    
-try:
-    umidade = float(input("Umidade: ").strip())
-except ValueError:
-    log.error("Umidade inválida")
-    sys.exit(1)
+def ask_for(field: str) -> float:
+    """
+        Asks for a field
+        and return the value prompted by the user
+        as a float value.
+    """
+    try:
+        field = float(input(field + ": ").strip())
+        return field
+    except ValueError:
+        log.error(field + " inválida")
+        sys.exit(1)    
+
+temp = ask_for("Temperatura")
+umidade = ask_for("Umidade")
 
 if temp > 45:
     print("ALERTA!!! 🥵 Perigo calor extremo")
